@@ -1,6 +1,6 @@
 creates IAM for cloudwatch logs
 
-hook-test
+hook-test-2
 
 got all the outputs? - review them all
 
