@@ -20,3 +20,16 @@ change names to default?
 add a version to the module
 
 apply fmt
+
+
+module "cloudtrail" {
+  source                     = "git::https://github.com/david-wells-1/terraform-aws-module-cloudtrail.git"
+  region                     = ""
+  cloudtrail_name            = ""
+  multi_region_trail         = 
+  enable_logging             = 
+  enable_log_file_validation = 
+  cloudwatch_log_group       = ""
+  sns_topic                  = ""
+  bucket_name                = ""
+}
