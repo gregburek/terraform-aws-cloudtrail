@@ -1,7 +1,3 @@
-variable "region" {
-  default = ""
-}
-
 variable "cloudtrail_name" {
   default     = ""
   description = "Specifies the name of the trail"
