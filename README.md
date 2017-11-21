@@ -1,10 +1,17 @@
 # AWS CloudTrail Terraform module with CloudWatch Alarms
 
-This module will create a CloudTrail which is configured to send logs to a CloudWatch Log Group.
+This module will create a CloudTrail which is configured with an S3 bucket and to send logs to a CloudWatch Log Group.
 
-Additionally 11 CloudWatch alarms are created with alarm notifications sent to an SNS Topic.
+Additionally, 11 CloudWatch alarms are created with alarm notifications sent to a created SNS Topic.
 
 **Remember to subscribe to the SNS Topic**
+
+## Module Input Variables
+
+* `cloudtrail_name` - Specifies the name of the trail
+* `cloudwatch_log_group` - The name of the log group
+* `sns_topic` - The friendly name for the SNS topic
+* `bucket_name` - The name of the bucket
 
 ## Usage
 
