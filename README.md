@@ -9,9 +9,9 @@ Additionally, 11 CloudWatch alarms are created with alarm notifications sent to 
 ## Module Input Variables
 
 * `cloudtrail_name` - Specifies the name of the trail
-* `cloudwatch_log_group` - The name of the log group
-* `sns_topic` - The friendly name for the SNS topic
-* `bucket_name` - The name of the bucket
+* `cloudwatch_log_group` - The name of the created Log Group
+* `sns_topic` - The friendly name for the created SNS topic
+* `bucket_name` - The name of the S3 bucket used by CloudTrail
 
 ## Usage
 
