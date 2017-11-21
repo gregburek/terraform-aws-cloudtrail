@@ -29,13 +29,13 @@ module "cloudtrail" {
     "aws" = "aws.london"
   }
 
-  cloudtrail_name            = ""
+  cloudtrail_name            = "${var.cloudtrail_name}"
   multi_region_trail         = true
   enable_logging             = true
   enable_log_file_validation = true
-  cloudwatch_log_group       = ""
-  sns_topic                  = ""
-  bucket_name                = ""
+  cloudwatch_log_group       = "${var.cloudwatch_log_group}"
+  sns_topic                  = "${var.sns_topic}"
+  bucket_name                = "${var.bucket_name}"
 }
 ```
 ## CloudWatch Alarms
