@@ -1,12 +1,12 @@
 # AWS CloudTrail Terraform module with CloudWatch Alarms
 
-This module will create a CloudTrial which is configured to send activity logs to a CloudWatch log group.
+This module will create a CloudTrail which is configured to send activity logs to a CloudWatch log group.
 
-Additionally 11 CloudWatch alarms are created with alarm notifications sent to an SNS Topic
+Additionally 11 CloudWatch alarms are created with alarm notifications sent to an SNS Topic.
 
 ## Usage
 
-Ensure an alies is added to the `provider` within you main terraform stack
+Ensure an alias is added to the `provider` within you terraform stack
 
 ```
 provider "aws" {
@@ -34,3 +34,7 @@ module "cloudtrail" {
 ## Author
 
 Module managed by [David Wells](https://github.com/david-wells-1)
+
+## License
+
+Apache 2 Licensed. See LICENSE for full details.
