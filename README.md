@@ -1,35 +1,36 @@
-creates IAM for cloudwatch logs
+# AWS CloudTrail Terraform module with CloudWatch Alarms
 
-hook-test-final-2
+This module will create a CloudTrial which is configured to send activity logs to a CloudWatch log group.
 
-got all the outputs? - review them all
+Additionally 11 CloudWatch alarms are created with alarm notifications sent to an SNS Topic
 
+## Usage
 
-add aws resource for the s3 logging bucket - update iam permssions
+Ensure an alies is added to the `provider` within you main terraform stack
 
-
-
-default aes356 on the bucket
-
-are , commas needed in the iam policy documents?
-
-check syntax normall on all ie {aws_} no spaces in the code
-
-change names to default?
-
-add a version to the module
-
-apply fmt
-
-
+```
+provider "aws" {
+  region = "eu-west-2"
+  alias  = "london"
+}
+```
+```
 module "cloudtrail" {
-  source                     = "git::https://github.com/david-wells-1/terraform-aws-module-cloudtrail.git"
-  region                     = ""
+  source = "git::https://github.com/david-wells-1/terraform-aws-module-cloudtrail.git"
+
+  providers = {
+    "aws" = "aws.london"
+  }
+
   cloudtrail_name            = ""
-  multi_region_trail         = 
-  enable_logging             = 
-  enable_log_file_validation = 
+  multi_region_trail         = true
+  enable_logging             = true
+  enable_log_file_validation = true
   cloudwatch_log_group       = ""
   sns_topic                  = ""
   bucket_name                = ""
 }
+```
+## Author
+
+Module managed by [David Wells](https://github.com/david-wells-1)
