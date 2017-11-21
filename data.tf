@@ -1,13 +1,14 @@
-provider "aws" {
-  region  = "${var.region}"
-}
-
 data "aws_caller_identity" "current_user" {}
+
+data "aws_region" "current" {
+  current = true
+}
 
 data "aws_iam_policy_document" "cloudtrail_assume_policy" {
   statement {
-    effect = "Allow"
+    effect  = "Allow"
     actions = ["sts:AssumeRole"]
+
     principals = {
       type        = "Service"
       identifiers = ["cloudtrail.amazonaws.com"]
@@ -17,21 +18,22 @@ data "aws_iam_policy_document" "cloudtrail_assume_policy" {
 
 data "aws_iam_policy_document" "cloudtrail_policy" {
   statement {
-    effect = "Allow"
-    actions = ["logs:CreateLogStream"]
-    resources = ["arn:aws:logs:${var.region}:${data.aws_caller_identity.current_user.account_id}:log-group:*:log-stream:*"]
+    effect    = "Allow"
+    actions   = ["logs:CreateLogStream"]
+    resources = ["arn:aws:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current_user.account_id}:log-group:*:log-stream:*"]
   }
 
   statement {
-    effect = "Allow"
-    actions = ["logs:PutLogEvents"]
-    resources = ["arn:aws:logs:${var.region}:${data.aws_caller_identity.current_user.account_id}:log-group:*:log-stream:*"]
+    effect    = "Allow"
+    actions   = ["logs:PutLogEvents"]
+    resources = ["arn:aws:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current_user.account_id}:log-group:*:log-stream:*"]
   }
 }
 
 data "aws_iam_policy_document" "cloudtrail_alarm_policy" {
   statement {
     effect = "Allow"
+
     principals = {
       type        = "AWS"
       identifiers = ["*"]
@@ -54,8 +56,7 @@ data "aws_iam_policy_document" "cloudtrail_alarm_policy" {
     condition = {
       test     = "StringEquals"
       variable = "AWS:SourceOwner"
-
-      values = ["${data.aws_caller_identity.current_user.account_id}"]
+      values   = ["${data.aws_caller_identity.current_user.account_id}"]
     }
   }
 }
@@ -70,8 +71,7 @@ data "aws_iam_policy_document" "cloudtrail_bucket" {
       identifiers = ["cloudtrail.amazonaws.com"]
     }
 
-    actions = ["s3:GetBucketAcl"]
-
+    actions   = ["s3:GetBucketAcl"]
     resources = ["arn:aws:s3:::${var.bucket_name}"]
   }
 
@@ -84,8 +84,7 @@ data "aws_iam_policy_document" "cloudtrail_bucket" {
       identifiers = ["cloudtrail.amazonaws.com"]
     }
 
-    actions = ["s3:PutObject"]
-
+    actions   = ["s3:PutObject"]
     resources = ["arn:aws:s3:::${var.bucket_name}/*"]
 
     condition = {
